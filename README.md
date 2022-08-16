@@ -8,6 +8,9 @@ In case you are curious to work on the dataset and give a try yourself before go
 the dataset is approximately 23GB and contains 15 different classes of objects to be detected. The folder structure is as below once extracted. Images which should be 
 part of train, test and validation sets are shared in the form of 3 text files.
 
+![unzipped](https://user-images.githubusercontent.com/94750531/184939134-d436365b-348a-41bf-b319-7e52877a883d.JPG)
+
+
 As always; it's a good practice to get to know the data before we train our model. I have written a short script to check for the number of files within each category
 [Images and respective XML files] and below are the results.
 
@@ -26,6 +29,9 @@ unique file names from each given train, validation and test set of text files a
 
 Even though the images are different the names are repeated and hence all the (41858*2) files couldn't be moved to the common folder.
 Just as a insight into one of the directory [Images/XML] we have 6 different camera angles as below.
+
+![camera_angles](https://user-images.githubusercontent.com/94750531/184939204-08b43235-29cf-450f-8798-82d6713df754.JPG)
+
 
 I have decided to train the model on one of the camera angle; but apart from the duplicate file names there is also the possibility of missing details for the 
 object(as the object perspective changes with the camera angle).
@@ -58,6 +64,11 @@ tf record to be created.
 An example can be seen below where the actual XML file is 000240_r.xml but the annotations are for totally different image. There is a possibility of even assigning 
 the wrong labels and bounding boxes in this scenario.
 
+![normal](https://user-images.githubusercontent.com/94750531/184939414-4db137be-f519-4a9f-b7f6-0487249d3c38.JPG)
+
+![_r](https://user-images.githubusercontent.com/94750531/184939447-af37bbcc-2749-4828-bc4e-d7cf7f69f9c0.JPG)
+
+
 but is not with the case of filenames which do not have the "_r" extension.
 
 so i have modified the script slightly to not move the files with "_r" extension. There were a total of app. 12k [including xml and jpg ] files used to create the train tf record file successfully.
@@ -77,11 +88,23 @@ Initially i trained the model on partial data and low epochs .The results, as ex
 
 So i trained the model on the entire data for 2000 epochs and bounding boxes now are better than before. Though cars are being detected fine our model has falsely detected auto as car.
 
+
+![download (3)](https://user-images.githubusercontent.com/94750531/184938272-22a62d73-66c6-474e-a323-0dfee2f15ce2.png)
+
+
 I have selected the below images from web specially to see how well the model performs as our model has not seen the images in rainy condition and it performed considerably.
+
+![semma](https://user-images.githubusercontent.com/94750531/184938337-44917b5f-962c-406a-a232-bb7ff6d1a13b.png)
+
+![download (2)](https://user-images.githubusercontent.com/94750531/184938386-d1722975-6d8e-4343-91d0-565f94a7b80c.png)
+
 
 Couple of observations is our model is good at detecting the card and bikes which i assume can be attributed to the distribution of the data. The below [image](https://idd.insaan.iiit.ac.in/dataset/details/)
 taken from the IDD website where the data was downloaded shows the representation of the data split across the 3 different dataset and since only part of the data 
 was used for training the model. with more data our model would surely perform well.
+
+![label_hierarchy](https://user-images.githubusercontent.com/94750531/184939641-ad17fed9-ff0b-4f18-b986-bc667be77286.png)
+
 
 Any suggestions or improvements are welcome :)
 Thank you.
